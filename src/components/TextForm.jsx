@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function TextForm() {
+export default function TextForm(props) {
     const [text, setText] = useState('')
     const [letters, setLetters] = useState(0)
     const [words, setWords] = useState(0)
@@ -9,7 +9,7 @@ export default function TextForm() {
     const handleChange = (e) => {
         setText(e.target.value)
         setLetters(text.length)
-        const w = text == "" ? 0 : text.split(" ").length
+        const w = text === "" ? 0 : text.split(" ").length
         setWords(w)
         setTime(words * 0.5)
     }
@@ -26,7 +26,7 @@ export default function TextForm() {
     return (
         <div className='container my-5'>
             <div className='row'>
-                <h1>Enter text to Analyze</h1>
+                <h1 className={`${props.mode === 'light' ? '' : 'text-white'}`}>Enter text to Analyze</h1>
             </div>
             <div className='row mt-3'>
                 <textarea className='form-control' rows="8" value={text} onChange={handleChange}></textarea>
@@ -34,13 +34,13 @@ export default function TextForm() {
 
             <div className='row mt-3'>
                 <div className='col-md-3'>
-                    <h5>Average {time} Seconds</h5>
+                    <h5 className={`${props.mode === 'light' ? '' : 'text-white'}`}>Average {time} Seconds</h5>
                 </div>
 
                 <div className='col-md-7'></div>
 
                 <div className='col-md-2 d-flex justify-content-end'>
-                    <h5>{letters} / {words}</h5>
+                    <h5 className={`${props.mode === 'light' ? '' : 'text-white'}`}>{letters} / {words}</h5>
                 </div>
             </div>
 
